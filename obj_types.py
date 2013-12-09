@@ -1,5 +1,35 @@
 #This code contains all (build-in) types of variables.
-import random
+import string
+from random import *
+
+################################################3
+
+def randomstring(string_len):
+	characters = string.ascii_letters + string.punctuation + string.digits
+	password=""
+	for x in range(randint(1,string_len)):
+    		password =password+"".join(choice(characters))
+	return password
+
+class VarString:
+	def __init__(self):
+		self._len = 10
+		self._string = ''
+	def	gen_val(self):
+		self._string = randomstring(self._len) 
+	def set_len(self,_len):
+		self._len=_len
+	def get_val(self):
+		return self._string
+
+
+
+
+
+
+
+
+###########################################
 
 class VarInt:
 	def __init__(self):
