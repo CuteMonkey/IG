@@ -13,8 +13,6 @@ class VarInt:
 		self.__width = 0      #the width of range
 		self.__base = 10      #base options: 2, 8, 10, 16
 		self._type = 'int'    #read-only
-		self._limit_pows = (1/5, 2/5, 3/5, 4/5, 1)  #read-only
-		self._gen_count = 0   #read-only
 	def set_max(self, _max):
 		if self.__max_flag:
 			if _max < self.__max:
@@ -40,14 +38,14 @@ class VarInt:
 			return self.__val
 		elif self.__base == 16:
 			pass
-	def gen_val(self):
+	def gen_val(self, level):
 		if self.__min < self.__max:
 			if self._gen_count < 10:
 				self.__width = self.__max - self.__min
-				self.__limit_max = int(0 + self.__width ** self._limit_pows[self._gen_count])
+				self.__limit_max = int(0 + self.__width ** (level/3))
 				if self.__limit_max > self.__max:
 					self.__limit_max = self.__max
-				self.__limit_min = int(0 - self.__width ** self._limit_pows[self._gen_count])
+				self.__limit_min = int(0 - self.__width ** (level/3))
 				if self.__limit_min < self.__min:
 					self.__limit_min = self.__min
 				self.__val = random.randint(self.__limit_min, self.__limit_max)
