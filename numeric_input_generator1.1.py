@@ -373,7 +373,7 @@ else:
 		while generation_loop:
 			for obj in obj_record:
 				if obj._type == 'int':
-					obj.gen_val()
+					obj.gen_val(level_num)
 			for rel in rel_record:
 				if check_rel(obj_record[rel.l_operand - 1].get_val(), obj_record[rel.r_operand - 1].get_val(), rel.operator):
 					continue
