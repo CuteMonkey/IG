@@ -1,7 +1,7 @@
 #This version handles 4 types: %d, %f, %dl, %fl.
 #update item: Make value range limited.
 
-import io, random, re
+import io, random, re, sys
 from obj_types import *
 
 
@@ -40,7 +40,7 @@ def check_rel(l_op, r_op, op_type):  #to check if the comparing relation is esta
 
 while True:
 	try:
-		ifile_path = input('Please key in the input file name:\n')
+		ifile_path = sys.argv[1]
 		ifile = open(ifile_path, 'r')
 		break
 	except OSError:  #if open file unsuccessfully
@@ -48,6 +48,7 @@ while True:
 ofile_path = ifile_path[:len(ifile_path) - 4] + '_input.txt'
 ofile = open(ofile_path, 'w')
 
+level_num = sys.argv[2]  #easy, medium, hard(1, 2, 3)
 part_num = 1  #the number of the handling part
 itext = ifile.readline()
 ilen, ipos = len(itext), 0  #'ipos' is the start position of unread part of 'itext'
