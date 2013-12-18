@@ -13,7 +13,7 @@ class VarInt:
 		self.__width = 0      #the width of range
 		self.__base = 10      #base options: 2, 8, 10, 16
 		self._type = 'int'    #read-only
-		self._limit_pows = (1/5, 1/5, 2/5, 2/5, 3/5, 3/5, 4/5, 4/5, 1, 1)  #read-only
+		self._limit_pows = (1/5, 2/5, 3/5, 4/5, 1)  #read-only
 		self._gen_count = 0   #read-only
 	def set_max(self, _max):
 		if self.__max_flag:
