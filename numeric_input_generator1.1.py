@@ -3,7 +3,7 @@
 
 import io, random, re, sys
 from obj_types import *
-
+from randomstring import *
 
 def check_rel(l_op, r_op, op_type):  #to check if the comparing relation is established
 	if op_type == '<':
@@ -119,6 +119,22 @@ while itext != '':
 			if not been_match and re_result:
 				been_match = True
 				orecord.append(VarInt())
+				obj_record.append(orecord[-1])
+				type_record.append(orecord[-1]._type)
+				ipos = ipos + 2
+			
+			re_result = re.match('%z' , itext[ipos:])	#string A-Z a-z
+			if not been_match and re_result:
+				been_match = True
+				orecord.append(VarStringDigit())
+				obj_record.append(orecord[-1])
+				type_record.append(orecord[-1]._type)
+				ipos =ipos + 2			
+			
+			re_result = re.match('%s' , itext[ipos:])	#string A-Z a-z 0-9
+			if not been_match and re_result:
+				been_match = True
+				orecord.append(VarString())
 				obj_record.append(orecord[-1])
 				type_record.append(orecord[-1]._type)
 				ipos = ipos + 2
@@ -386,6 +402,10 @@ else:
 		while index < len(orecord):
 			if type_record[index] == 'int':
 				ofile.write(str(orecord[index].get_val()))
+			elif type_record[index] == 'string':
+				ofile.write(orecord[index].get_str())
+			elif type_record[index] == 'stringdigit':
+				ofile.write(orecord[index].get_str())
 			else:
 				ofile.write(orecord[index])
 			index = index + 1
